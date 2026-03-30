@@ -1184,6 +1184,14 @@ function retakeQuiz() {
   document.getElementById('intro-screen').classList.remove('hidden');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// Make all functions explicitly global
+window.startQuiz = startQuiz;
+window.goNext = goNext;
+window.goBack = goBack;
+window.retakeQuiz = retakeQuiz;
+window.submitOptIn = submitOptIn;
+window.selectAnswer = selectAnswer;
 </script>
 
 </body>
