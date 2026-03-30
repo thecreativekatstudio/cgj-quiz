@@ -620,7 +620,7 @@
   }
 
   /* HIDDEN */
-  .hidden { display: none !important; }
+
 
   /* RESPONSIVE */
   @media (max-width: 480px) {
@@ -652,7 +652,7 @@
   </div>
 
   <!-- QUIZ SCREEN -->
-  <div id="quiz-screen" class="hidden">
+  <div id="quiz-screen" style="display:none">
     <div class="progress-container">
       <div class="progress-top">
         <span class="progress-label">Your Progress</span>
@@ -676,7 +676,7 @@
   </div>
 
   <!-- RESULTS SCREEN -->
-  <div id="results-screen" class="hidden">
+  <div id="results-screen" style="display:none">
     <div class="results-section">
 
       <div class="result-badge">
@@ -949,8 +949,8 @@ let answers = new Array(15).fill(null);
 let scores = { Learn: 0, Grow: 0, Monetize: 0, Manage: 0, Expand: 0 };
 
 function startQuiz() {
-  document.getElementById('intro-screen').classList.add('hidden');
-  document.getElementById('quiz-screen').classList.remove('hidden');
+  document.getElementById('intro-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
   renderQuestion();
 }
 
@@ -1046,8 +1046,8 @@ function showResults() {
   const secondIndex = stageOrder.indexOf(secondStage);
   const isTransitioning = (topScore - secondScore) <= 2 && secondScore > 0 && Math.abs(stageIndex - secondIndex) === 1;
 
-  document.getElementById('quiz-screen').classList.add('hidden');
-  document.getElementById('results-screen').classList.remove('hidden');
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('results-screen').style.display = 'block';
 
   // Stage name with color
   const stageNameEl = document.getElementById('result-stage-name');
@@ -1180,8 +1180,8 @@ function retakeQuiz() {
   currentQuestion = 0;
   answers = new Array(15).fill(null);
   scores = { Learn: 0, Grow: 0, Monetize: 0, Manage: 0, Expand: 0 };
-  document.getElementById('results-screen').classList.add('hidden');
-  document.getElementById('intro-screen').classList.remove('hidden');
+  document.getElementById('results-screen').style.display = 'none';
+  document.getElementById('intro-screen').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
