@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Creative Growth Journey Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #3a9aa0;
+    --teal-light: #5bb8be;
+    --teal-dark: #2c7a80;
+    --salmon: #e8806a;
+    --salmon-light: #f0a090;
+    --ivory: #faf7f2;
+    --white: #ffffff;
+    --black: #1a1a1a;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --border: #e5e7eb;
+
+    --learn-color: #6b8dd6;
+    --grow-color: #e8806a;
+    --monetize-color: #6abf8a;
+    --manage-color: #9b7fd4;
+    --expand-color: #3a9aa0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--ivory);
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  .quiz-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* HEADER */
+  .quiz-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .quiz-header .eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .quiz-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .quiz-header h1 span {
+    color: var(--teal);
+  }
+
+  .quiz-header p {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto 28px;
+  }
+
+  .start-btn {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 20px rgba(58,154,160,0.3);
+  }
+
+  .start-btn:hover {
+    background: var(--teal-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(58,154,160,0.4);
+  }
+
+  .cat-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0;
+  }
+
+  .cat-divider::before,
+  .cat-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .cat-icon {
+    font-size: 20px;
+  }
+
+  /* PROGRESS BAR */
+  .progress-container {
+    margin-bottom: 32px;
+  }
+
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .progress-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .progress-count {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--teal);
+  }
+
+  .progress-bar-track {
+    width: 100%;
+    height: 8px;
+    background: var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    border-radius: 100px;
+    transition: width 0.4s ease;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+    animation: fadeSlideIn 0.35s ease;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-number {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 22px);
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.4;
+    margin-bottom: 28px;
+  }
+
+  .answers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .answer-btn {
+    background: var(--ivory);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    line-height: 1.4;
+  }
+
+  .answer-btn:hover {
+    border-color: var(--teal);
+    background: white;
+    transform: translateX(4px);
+    box-shadow: 0 2px 12px rgba(58,154,160,0.12);
+  }
+
+  .answer-btn.selected {
+    border-color: var(--teal);
+    background: linear-gradient(135deg, rgba(58,154,160,0.08), rgba(91,184,190,0.05));
+    color: var(--teal-dark);
+  }
+
+  .answer-letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--gray);
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .answer-btn.selected .answer-letter {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .nav-btn {
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .nav-btn.primary {
+    background: var(--teal);
+    color: white;
+    box-shadow: 0 4px 16px rgba(58,154,160,0.25);
+  }
+
+  .nav-btn.primary:hover:not(:disabled) {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+  }
+
+  .nav-btn.primary:disabled {
+    background: var(--border);
+    color: var(--gray);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .nav-btn.secondary {
+    background: transparent;
+    color: var(--gray);
+    border: 2px solid var(--border);
+  }
+
+  .nav-btn.secondary:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  /* RESULTS */
+  .results-section {
+    animation: fadeSlideIn 0.5s ease;
+  }
+
+  .result-badge {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .result-badge .stage-label {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+
+  .result-badge .stage-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .result-badge .transition-note {
+    font-size: 14px;
+    color: var(--gray);
+    font-style: italic;
+  }
+
+  .result-card {
+    background: white;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    margin-bottom: 28px;
+  }
+
+  .result-description {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+
+  .result-feels h3, .result-focus h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--black);
+  }
+
+  .result-feels ul, .result-focus ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .result-feels ul li, .result-focus ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--gray);
+  }
+
+  .result-feels ul li::before {
+    content: '✦';
+    color: var(--teal);
+    font-size: 10px;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .result-focus ul li::before {
+    content: '→';
+    color: var(--salmon);
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .transformation-box {
+    background: linear-gradient(135deg, rgba(58,154,160,0.08), rgba(91,184,190,0.04));
+    border-left: 4px solid var(--teal);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin-top: 8px;
+  }
+
+  .transformation-box .label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .transformation-box p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    font-style: italic;
+  }
+
+  /* JOURNEY MAP */
+  .journey-map {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    margin-bottom: 28px;
+  }
+
+  .journey-map h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .stages-path {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 4px 0;
+  }
+
+  .stage-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .stage-bubble {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+  }
+
+  .stage-bubble.muted {
+    background: var(--gray-light);
+    opacity: 0.5;
+  }
+
+  .stage-label-text {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .stage-label-text.muted {
+    color: var(--gray);
+    opacity: 0.5;
+  }
+
+  .stage-arrow {
+    font-size: 18px;
+    color: var(--border);
+    flex-shrink: 0;
+    margin: 0 4px;
+    padding-bottom: 20px;
+  }
+
+  .stage-node.active .stage-bubble {
+    transform: scale(1.15);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    border-color: white;
+  }
+
+  .you-are-here {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    background: var(--black);
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-top: 2px;
+  }
+
+  /* OPT-IN */
+  .optin-card {
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    color: white;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 40px rgba(58,154,160,0.3);
+  }
+
+  .optin-card .optin-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 12px;
+  }
+
+  .optin-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 900;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .optin-card p {
+    font-size: 15px;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .optin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    margin: 0 auto 16px;
+  }
+
+  .optin-form input {
+    padding: 15px 20px;
+    border-radius: 50px;
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    outline: none;
+    color: var(--black);
+    background: rgba(255,255,255,0.95);
+  }
+
+  .optin-form input::placeholder {
+    color: var(--gray);
+  }
+
+  .optin-form button {
+    padding: 15px 20px;
+    border-radius: 50px;
+    border: none;
+    background: var(--salmon);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(232,128,106,0.4);
+  }
+
+  .optin-form button:hover {
+    background: #d4694f;
+    transform: translateY(-1px);
+  }
+
+  .optin-privacy {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+
+  .optin-success {
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 16px;
+    display: none;
+  }
+
+  .optin-success p {
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+
+  .retake-link {
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  .retake-link button {
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .retake-link button:hover {
+    color: var(--teal);
+  }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* RESPONSIVE */
+  @media (max-width: 480px) {
+    .question-card { padding: 28px 20px; }
+    .result-card { padding: 24px 20px; }
+    .optin-card { padding: 28px 20px; }
+    .stage-bubble { width: 52px; height: 52px; font-size: 18px; }
+    .stage-label-text { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="quiz-wrapper">
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen">
+    <div class="quiz-header">
+      <div class="eyebrow">The Creative Kat Studio</div>
+      <h1>The Creative Growth<br><span>Journey Quiz</span></h1>
+      <p>Discover where you are in your Canva and creative business journey, and what to focus on next.</p>
+      <button class="start-btn" onclick="startQuiz()">Take the Quiz ✦</button>
+    </div>
+    <div class="cat-divider"><span class="cat-icon">🐱</span></div>
+    <div style="text-align:center; color: var(--gray); font-size: 14px; line-height: 1.7;">
+      <strong style="color: var(--black);">15 quick questions.</strong> No right or wrong answers.<br>
+      Just an honest look at where you are right now.
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quiz-screen" class="hidden">
+    <div class="progress-container">
+      <div class="progress-top">
+        <span class="progress-label">Your Progress</span>
+        <span class="progress-count" id="progress-count">1 of 15</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar" style="width: 6.67%"></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="question-card">
+      <div class="question-number" id="question-number">Question 1</div>
+      <div class="question-text" id="question-text"></div>
+      <div class="answers-list" id="answers-list"></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn secondary" id="back-btn" onclick="goBack()" style="display:none">← Back</button>
+      <button class="nav-btn primary" id="next-btn" onclick="goNext()" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="results-screen" class="hidden">
+    <div class="results-section">
+
+      <div class="result-badge">
+        <div class="stage-label">Your Stage</div>
+        <div class="stage-name" id="result-stage-name"></div>
+        <div class="transition-note" id="transition-note"></div>
+      </div>
+
+      <div class="result-card" id="result-card">
+        <div class="result-description" id="result-description"></div>
+        <div class="result-feels">
+          <h3>This stage often feels like...</h3>
+          <ul id="result-feels-list"></ul>
+        </div>
+        <div class="result-focus">
+          <h3>What to focus on next</h3>
+          <ul id="result-focus-list"></ul>
+        </div>
+        <div class="transformation-box">
+          <div class="label">Your Transformation</div>
+          <p id="result-transformation"></p>
+        </div>
+      </div>
+
+      <div class="journey-map">
+        <h3>Your Place in the Creative Growth Journey</h3>
+        <div class="stages-path" id="stages-path"></div>
+      </div>
+
+      <div class="optin-card">
+        <div class="optin-eyebrow">Free Download</div>
+        <h2>Get the Full Creative Growth Journey Guide</h2>
+        <p>See the complete roadmap for all five stages, what to focus on, and the exact next steps to move forward in your creative business.</p>
+        <div class="optin-form" id="optin-form">
+          <input type="text" id="optin-name" placeholder="First name" />
+          <input type="email" id="optin-email" placeholder="Your email address" />
+          <button onclick="submitOptIn()">Send Me the Guide 💙</button>
+        </div>
+        <div class="optin-success" id="optin-success">
+          <p>🎉 You're all set! Check your inbox for your Creative Growth Journey Guide.</p>
+        </div>
+        <p class="optin-privacy">No spam, ever. Unsubscribe anytime.</p>
+      </div>
+
+      <div class="retake-link">
+        <button onclick="retakeQuiz()">Retake the quiz</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "How confident do you feel using Canva right now?",
+    answers: [
+      { text: "I'm still learning the basics and often feel overwhelmed", stage: "Learn" },
+      { text: "I can use it pretty well, but I still second-guess myself sometimes", stage: "Grow" },
+      { text: "I'm confident using Canva for my business and creative projects", stage: "Grow" }
+    ]
+  },
+  {
+    text: "When you open Canva, how do you usually feel?",
+    answers: [
+      { text: "Not sure where to start", stage: "Learn" },
+      { text: "I can get things done, but it still takes me longer than I want", stage: "Grow" },
+      { text: "I know what I'm doing and can usually create pretty efficiently", stage: "Grow" }
+    ]
+  },
+  {
+    text: "Which statement best describes your current content creation?",
+    answers: [
+      { text: "I'm not posting consistently yet", stage: "Learn" },
+      { text: "I'm creating content, but it feels slow or inconsistent", stage: "Grow" },
+      { text: "I'm regularly creating content and have an established rhythm", stage: "Grow" }
+    ]
+  },
+  {
+    text: "How would you describe your visual brand right now?",
+    answers: [
+      { text: "I don't really have one yet", stage: "Learn" },
+      { text: "I have some colors, fonts, or style ideas, but it's not very consistent", stage: "Grow" },
+      { text: "I have a clear visual style and use it regularly", stage: "Grow" }
+    ]
+  },
+  {
+    text: "When it comes to designing content, which feels most true?",
+    answers: [
+      { text: "I mostly rely on templates because creating from scratch feels hard", stage: "Learn" },
+      { text: "I can customize designs, but I want them to look more polished", stage: "Grow" },
+      { text: "I can create strong visuals and adapt them for different needs", stage: "Grow" }
+    ]
+  },
+  {
+    text: "What is your biggest challenge right now?",
+    answers: [
+      { text: "Learning Canva without feeling overwhelmed", stage: "Learn" },
+      { text: "Making content faster and more consistently", stage: "Grow" },
+      { text: "Turning what I create into something more strategic for my business", stage: "Monetize" }
+    ]
+  },
+  {
+    text: "Have you used your Canva skills to support your business in a meaningful way yet?",
+    answers: [
+      { text: "I'm still learning and experimenting", stage: "Learn" },
+      { text: "Yes, mostly for my own content and branding", stage: "Grow" },
+      { text: "Yes, and I'm starting to use those skills more strategically", stage: "Monetize" }
+    ]
+  },
+  {
+    text: "Are you currently selling anything connected to your creativity, content, or Canva skills?",
+    answers: [
+      { text: "No, not yet", stage: "Grow" },
+      { text: "Not really, but I've thought about it", stage: "Monetize" },
+      { text: "Yes, I already have something I sell, or I'm actively testing offers", stage: "Monetize" }
+    ]
+  },
+  {
+    text: "Which statement sounds most like you right now?",
+    answers: [
+      { text: "I want to get comfortable creating good content first", stage: "Grow" },
+      { text: "I keep thinking I could probably make money with this, but I'm not sure how", stage: "Monetize" },
+      { text: "I already have offers or systems in place, and now I want to grow bigger", stage: "Expand" }
+    ]
+  },
+  {
+    text: "Have you created any digital products, templates, services, or offers yet?",
+    answers: [
+      { text: "No", stage: "Grow" },
+      { text: "I have a few ideas or early experiments", stage: "Monetize" },
+      { text: "Yes, I already have at least one offer, product, or service", stage: "Monetize" }
+    ]
+  },
+  {
+    text: "How does your workflow feel when it comes to creating and managing content for your business?",
+    answers: [
+      { text: "I don't really have a workflow yet, I just create things as I need them", stage: "Grow" },
+      { text: "I have some systems in place for planning and tracking my content, but they're inconsistent or hard to keep up with", stage: "Manage" },
+      { text: "My content workflow is pretty solid, and now I want to scale beyond just keeping up", stage: "Expand" }
+    ]
+  },
+  {
+    text: "Which best describes your main focus right now?",
+    answers: [
+      { text: "Learning Canva and getting more confident", stage: "Learn" },
+      { text: "Creating better content and becoming more consistent", stage: "Grow" },
+      { text: "Scaling what I've already built and growing my reach or authority", stage: "Expand" }
+    ]
+  },
+  {
+    text: "How do you currently plan and track your social media content and business projects?",
+    answers: [
+      { text: "I don't really track anything, I mostly wing it", stage: "Grow" },
+      { text: "I have a basic system, like a spreadsheet or simple planner, but it's not keeping up with everything I'm juggling", stage: "Manage" },
+      { text: "I have a solid tracking system in place and I'm focused on using it to support bigger growth", stage: "Expand" }
+    ]
+  },
+  {
+    text: "When you think about your next level, what feels most exciting?",
+    answers: [
+      { text: "Feeling more confident with Canva and design", stage: "Learn" },
+      { text: "Turning my creativity into income", stage: "Monetize" },
+      { text: "Expanding my visibility, offers, and opportunities", stage: "Expand" }
+    ]
+  },
+  {
+    text: "Which statement feels most like your current season?",
+    answers: [
+      { text: "I'm learning the skills", stage: "Learn" },
+      { text: "I'm building confidence and momentum", stage: "Grow" },
+      { text: "I'm growing something bigger than just content — I'm building a real creative business", stage: "Expand" }
+    ]
+  }
+];
+
+const stageData = {
+  Learn: {
+    color: "#6b8dd6",
+    emoji: "💡",
+    description: "You're just getting started with Canva, or maybe you've poked around a bit but still feel like everyone else got the secret map and you didn't. Right now the platform can feel a little overwhelming, and you may not always know where to start when it's time to create something for your business. This stage is all about building confidence and getting comfortable enough to stop feeling intimidated every time you open Canva.",
+    feels: [
+      "Canva feels helpful, but also a little confusing",
+      "You know you need graphics, but you're not sure how to make them well",
+      "You want someone to break things down in a simple, beginner-friendly way",
+      "You may compare yourself to people who make Canva look easy"
+    ],
+    focus: [
+      "Learn the basic tools and understand how templates work",
+      "Get familiar with fonts, colors, spacing, and simple design structure",
+      "Build confidence one design at a time — you don't need to master everything"
+    ],
+    transformation: "I understand Canva and can create simple designs."
+  },
+  Grow: {
+    color: "#e8806a",
+    emoji: "🌱",
+    description: "You can use Canva, but creating content still feels slower and more inconsistent than you'd like. You're no longer completely new, but you're not yet at the point where content feels easy or repeatable. You want your designs to look better, feel more like your brand, and take less time to create. This is where real momentum starts.",
+    feels: [
+      "You can create content, but it takes longer than you want",
+      "Your graphics are improving, but they don't always feel polished",
+      "You want more consistency in your brand and content",
+      "You're trying to create regularly, but it can feel a little scattered"
+    ],
+    focus: [
+      "Build a stronger visual style and brand consistency",
+      "Improve your design habits and make content creation faster",
+      "Use templates, brand tools, and repeatable workflows to your advantage"
+    ],
+    transformation: "I can create consistent, better content."
+  },
+  Monetize: {
+    color: "#6abf8a",
+    emoji: "💰",
+    description: "You're beginning to realize your Canva skills and creative ideas might be more than just helpful for your own business — they could become income. You may be wondering what you could sell, whether templates or digital products make sense for you, or how to turn your creativity into something more strategic. This is the exciting shift from creator to seller.",
+    feels: [
+      "You're curious about digital products, templates, or creative offers",
+      "You want to make money with your skills, but you're not fully sure where to begin",
+      "You may already be testing ideas or sharing early offers",
+      "You're ready to think more strategically about what you create"
+    ],
+    focus: [
+      "Focus on simple offers and practical product ideas",
+      "Test early concepts before building anything too big",
+      "Shift your mindset from consumer to creator"
+    ],
+    transformation: "I can turn my creativity into income."
+  },
+  Manage: {
+    color: "#9b7fd4",
+    emoji: "⚙️",
+    description: "You've built enough momentum that things are starting to feel messy. You may already have content, products, ideas, or multiple moving parts in your business, but the behind-the-scenes structure hasn't quite caught up. This stage is not about learning more Canva tricks — it's about making your business more manageable.",
+    feels: [
+      "You have a lot going on, but not enough structure",
+      "You're trying to stay consistent, but things feel scattered",
+      "You need better planning, organization, or workflow systems",
+      "You want your business to feel smoother and less stressful"
+    ],
+    focus: [
+      "Create systems for planning, organizing, and tracking your content",
+      "Build workflows that support what you're already creating",
+      "Make your business feel organized so you can grow without the chaos"
+    ],
+    transformation: "My business feels organized and manageable."
+  },
+  Expand: {
+    color: "#3a9aa0",
+    emoji: "📈",
+    description: "You've already built a strong foundation, and now you're thinking beyond simply creating content or keeping up with the day-to-day. You're asking bigger questions about growth, visibility, scale, and what comes next. You're no longer just learning, improving, or organizing — you're expanding.",
+    feels: [
+      "You're thinking about visibility, reach, and authority",
+      "You want to grow something bigger than just content creation",
+      "You may be exploring collaborations, advanced programs, or higher-level strategy",
+      "You're ready to use what you've built as a platform for bigger opportunities"
+    ],
+    focus: [
+      "Expand your offers, grow your audience, and increase your authority",
+      "Create strategic opportunities that move your business forward",
+      "Build on the foundation you already have — scale what's working"
+    ],
+    transformation: "I've built a scalable creative business."
+  }
+};
+
+const stageOrder = ["Learn", "Grow", "Monetize", "Manage", "Expand"];
+let topStage = "Learn";
+let currentQuestion = 0;
+let answers = new Array(15).fill(null);
+let scores = { Learn: 0, Grow: 0, Monetize: 0, Manage: 0, Expand: 0 };
+
+function startQuiz() {
+  document.getElementById('intro-screen').classList.add('hidden');
+  document.getElementById('quiz-screen').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQuestion];
+  const letters = ['A', 'B', 'C'];
+
+  document.getElementById('question-number').textContent = `Question ${currentQuestion + 1}`;
+  document.getElementById('question-text').textContent = q.text;
+  document.getElementById('progress-count').textContent = `${currentQuestion + 1} of 15`;
+  document.getElementById('progress-bar').style.width = `${((currentQuestion + 1) / 15) * 100}%`;
+
+  const answersList = document.getElementById('answers-list');
+  answersList.innerHTML = '';
+
+  q.answers.forEach((answer, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn' + (answers[currentQuestion] === i ? ' selected' : '');
+    btn.innerHTML = `<span class="answer-letter">${letters[i]}</span><span>${answer.text}</span>`;
+    btn.onclick = () => selectAnswer(i);
+    answersList.appendChild(btn);
+  });
+
+  document.getElementById('next-btn').disabled = answers[currentQuestion] === null;
+  document.getElementById('next-btn').textContent = currentQuestion === 14 ? 'See My Results →' : 'Next →';
+  document.getElementById('back-btn').style.display = currentQuestion === 0 ? 'none' : 'block';
+
+  // Re-animate
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeSlideIn 0.35s ease';
+}
+
+function selectAnswer(index) {
+  answers[currentQuestion] = index;
+  document.querySelectorAll('.answer-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i === index);
+  });
+  document.getElementById('next-btn').disabled = false;
+}
+
+function goNext() {
+  if (answers[currentQuestion] === null) return;
+  if (currentQuestion < 14) {
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function goBack() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+function calculateScores() {
+  scores = { Learn: 0, Grow: 0, Monetize: 0, Manage: 0, Expand: 0 };
+  answers.forEach((answerIndex, qIndex) => {
+    if (answerIndex !== null) {
+      const stage = questions[qIndex].answers[answerIndex].stage;
+      scores[stage]++;
+    }
+  });
+}
+
+function showResults() {
+  calculateScores();
+
+  // Find top stage
+  topStage = 'Learn';
+  let topScore = 0;
+  let secondStage = '';
+  let secondScore = 0;
+
+  for (const [stage, score] of Object.entries(scores)) {
+    if (score > topScore) {
+      secondStage = topStage;
+      secondScore = topScore;
+      topStage = stage;
+      topScore = score;
+    } else if (score > secondScore) {
+      secondStage = stage;
+      secondScore = score;
+    }
+  }
+
+  const data = stageData[topStage];
+  const stageIndex = stageOrder.indexOf(topStage);
+  const secondIndex = stageOrder.indexOf(secondStage);
+  const isTransitioning = (topScore - secondScore) <= 2 && secondScore > 0 && Math.abs(stageIndex - secondIndex) === 1;
+
+  document.getElementById('quiz-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.remove('hidden');
+
+  // Stage name with color
+  const stageNameEl = document.getElementById('result-stage-name');
+  stageNameEl.textContent = `Stage ${stageOrder.indexOf(topStage) + 1}: ${topStage}`;
+  stageNameEl.style.color = data.color;
+
+  // Transition note
+  const transitionEl = document.getElementById('transition-note');
+  if (isTransitioning) {
+    transitionEl.textContent = `...with one foot stepping into ${secondStage}`;
+    transitionEl.style.display = 'block';
+  } else {
+    transitionEl.style.display = 'none';
+  }
+
+  // Result card border accent
+  document.getElementById('result-card').style.borderTop = `4px solid ${data.color}`;
+
+  // Description
+  document.getElementById('result-description').textContent = data.description;
+
+  // Feels list
+  const feelsList = document.getElementById('result-feels-list');
+  feelsList.innerHTML = '';
+  data.feels.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    feelsList.appendChild(li);
+  });
+
+  // Focus list
+  const focusList = document.getElementById('result-focus-list');
+  focusList.innerHTML = '';
+  data.focus.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    focusList.appendChild(li);
+  });
+
+  // Transformation
+  document.getElementById('result-transformation').textContent = data.transformation;
+
+  // Journey map
+  buildJourneyMap(topStage);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function buildJourneyMap(activeStage) {
+  const path = document.getElementById('stages-path');
+  path.innerHTML = '';
+
+  const stageEmojis = { Learn: '💡', Grow: '🌱', Monetize: '💰', Manage: '⚙️', Expand: '📈' };
+  const stageColors = {
+    Learn: stageData.Learn.color,
+    Grow: stageData.Grow.color,
+    Monetize: stageData.Monetize.color,
+    Manage: stageData.Manage.color,
+    Expand: stageData.Expand.color
+  };
+
+  stageOrder.forEach((stage, i) => {
+    const isActive = stage === activeStage;
+
+    const node = document.createElement('div');
+    node.className = 'stage-node' + (isActive ? ' active' : '');
+
+    const bubble = document.createElement('div');
+    bubble.className = 'stage-bubble' + (isActive ? '' : ' muted');
+    bubble.textContent = stageEmojis[stage];
+    if (isActive) {
+      bubble.style.background = `linear-gradient(135deg, ${stageColors[stage]}, ${stageColors[stage]}cc)`;
+    }
+
+    const label = document.createElement('div');
+    label.className = 'stage-label-text' + (isActive ? '' : ' muted');
+    label.textContent = stage;
+    if (isActive) label.style.color = stageColors[stage];
+
+    node.appendChild(bubble);
+    node.appendChild(label);
+
+    if (isActive) {
+      const youAreHere = document.createElement('div');
+      youAreHere.className = 'you-are-here';
+      youAreHere.textContent = 'You are here';
+      node.appendChild(youAreHere);
+    }
+
+    path.appendChild(node);
+
+    if (i < stageOrder.length - 1) {
+      const arrow = document.createElement('div');
+      arrow.className = 'stage-arrow';
+      arrow.textContent = '›';
+      path.appendChild(arrow);
+    }
+  });
+}
+
+async function submitOptIn() {
+  const name = document.getElementById('optin-name').value.trim();
+  const email = document.getElementById('optin-email').value.trim();
+
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  const submitBtn = document.querySelector('.optin-form button');
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+
+  const tagName = 'CGJ: ' + topStage;
+
+  try {
+    await fetch('https://hooks.zapier.com/hooks/catch/17715937/un81n65/', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, stage: tagName }),
+    });
+  } catch (e) {
+    console.log('Webhook error:', e);
+  }
+
+  document.getElementById('optin-form').style.display = 'none';
+  document.getElementById('optin-success').style.display = 'block';
+}}
+
+function retakeQuiz() {
+  currentQuestion = 0;
+  answers = new Array(15).fill(null);
+  scores = { Learn: 0, Grow: 0, Monetize: 0, Manage: 0, Expand: 0 };
+  document.getElementById('results-screen').classList.add('hidden');
+  document.getElementById('intro-screen').classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
