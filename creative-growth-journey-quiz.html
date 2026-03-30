@@ -109,11 +109,12 @@ function intro(){
     '<div class="eyebrow">The Creative Kat Studio</div>'+
     '<h1 class="quiz-title">The Creative Growth<br><span>Journey Quiz</span></h1>'+
     '<p class="subtitle">Discover where you are in your Canva and creative business journey, and what to focus on next.</p>'+
-    '<button class="btn-primary" id="sb">Take the Quiz ✦</button>'+
+    '<button class="btn-primary" id="sb" type="button">Take the Quiz ✦</button>'+
     '<div class="divider"><span>🐱</span></div>'+
     '<p style="color:#6b7280;font-size:14px;line-height:1.7"><strong style="color:#1a1a1a">15 quick questions.</strong> No right or wrong answers.<br>Just an honest look at where you are right now.</p>'+
     '</div>');
-  document.getElementById('sb').onclick = function(){ showQ(0); };
+  var sbtn = document.getElementById('sb');
+  sbtn.addEventListener('click', function(e){ e.preventDefault(); showQ(0); }, false);
 }
 
 function showQ(i){
@@ -203,7 +204,8 @@ function results(){
     if(!e||e.indexOf('@')<0){alert('Please enter a valid email address.');return;}
     document.getElementById('ob').textContent='Sending...';
     document.getElementById('ob').disabled=true;
-    fetch(ZAPIER,{method:'POST',body:JSON.stringify({name:n,email:e,stage:'CGJ: '+topS})}).catch(function(){});
+    var tagIDs={Learn:18403244,Grow:18401602,Monetize:18403386,Manage:18403382,Expand:18403388};
+    fetch(ZAPIER,{method:'POST',body:JSON.stringify({name:n,email:e,stage:'CGJ: '+topS,tag_id:tagIDs[topS]})}).catch(function(){});
     document.getElementById('ow').innerHTML='<div class="success-msg">🎉 You\'re all set! Check your inbox for your Creative Growth Journey Guide.</div>';
   };
   document.getElementById('rb').onclick = function(){ intro(); };
